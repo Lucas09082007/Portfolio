@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lucas Marik - Portfolio</title>
+  <title>Lucas Marique - Portfolio</title>
   
   <!-- Font Awesome (Icônes) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -18,6 +18,10 @@
       --accent-purple: #7c3aed;
       --text-main: #f3f4f6;
       --text-muted: #9ca3af;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     * {
@@ -210,6 +214,7 @@
     /* SECTIONS GENERALES */
     section {
       padding: 50px 0;
+      scroll-margin-top: 90px;
     }
 
     .section-title {
@@ -240,14 +245,45 @@
     .about-card-content {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
 
-    .avatar-placeholder {
-      width: 180px;
-      height: 140px;
-      background: #1e293b;
-      border-radius: 8px;
+    .profile-box {
+      width: 160px;
+      height: 160px;
+      border-radius: 12px;
       flex-shrink: 0;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.35), rgba(124, 58, 237, 0.35));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .profile-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .profile-fallback {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #e0e7ff;
+      letter-spacing: 2px;
+    }
+
+    .profile-role-badge {
+      font-size: 0.72rem;
+      color: #c7d2fe;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .traits {
@@ -378,8 +414,27 @@
       font-size: 0.9rem;
     }
 
+    .contact-item a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-item a:hover {
+      color: #fff;
+    }
+
     .contact-item i {
       color: var(--accent-blue);
+    }
+
+    @media (max-width: 768px) {
+      .hero,
+      .about-grid,
+      .about-card-content {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
@@ -398,7 +453,9 @@
       <a href="#projects">Projets</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="#" class="btn-cv"><i class="fa-solid fa-download"></i> Télécharger mon CV</a>
+    <a href="CV%20professionnel%20gris%20simple.pdf" target="_blank" rel="noopener noreferrer" download="CV-Lucas-Marique.pdf" class="btn-cv">
+      <i class="fa-solid fa-download"></i> Télécharger mon CV
+    </a>
   </header>
 
   <!-- HERO SECTION -->
@@ -413,12 +470,14 @@
       </p>
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">Voir mes projets <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-        <a href="#" class="btn btn-secondary">Télécharger mon CV <i class="fa-solid fa-download"></i></a>
+        <a href="CV%20professionnel%20gris%20simple.pdf" target="_blank" rel="noopener noreferrer" download="CV-Lucas-Marique.pdf" class="btn btn-secondary">
+          Télécharger mon CV <i class="fa-solid fa-download"></i>
+        </a>
       </div>
       <div class="socials">
-        <a href="#"><i class="fa-brands fa-github"></i></a>
-        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="#"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="#contact"><i class="fa-solid fa-envelope"></i></a>
       </div>
     </div>
     <div class="hero-preview">
@@ -436,7 +495,16 @@
         <p class="section-subtitle" style="margin-bottom: 5px;">À propos de moi</p>
         <h3 class="section-title">Qui suis-je ?</h3>
         <div class="about-card-content" style="margin-top: 15px;">
-          <div class="avatar-placeholder"></div>
+          <!-- Place ta photo "photo-lucas.jpg" dans le même dossier que ce fichier HTML -->
+          <div class="profile-box">
+            <img
+              src="photo-lucas.jpg"
+              alt="Photo de Lucas Marique"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block'; this.nextElementSibling.nextElementSibling.style.display='block';"
+            >
+            <span class="profile-fallback" style="display: none;">LM</span>
+            <span class="profile-role-badge" style="display: none;">BTS SIO SLAM</span>
+          </div>
           <div>
             <p style="color: var(--text-muted); font-size: 0.9rem;">
               Je m'appelle Lucas, j'ai 19 ans et je suis actuellement en BTS SIO option SLAM au lycée Benjamin Franklin à Orléans.
@@ -566,9 +634,18 @@
   <section id="contact" style="margin-bottom: 60px;">
     <h3 class="section-title">Contact</h3>
     <div class="contact-container">
-      <div class="contact-item"><i class="fa-solid fa-envelope"></i> lucas.marik@example.com</div>
-      <div class="contact-item"><i class="fa-solid fa-phone"></i> 06 12 34 56 78</div>
-      <div class="contact-item"><i class="fa-solid fa-location-dot"></i> Orléans, France</div>
+      <div class="contact-item">
+        <i class="fa-solid fa-envelope"></i>
+        <a href="mailto:lucas.45.marik@gmail.com">lucas.45.marik@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <i class="fa-solid fa-phone"></i>
+        <a href="tel:+33766251104">07 66 25 11 04</a>
+      </div>
+      <div class="contact-item">
+        <i class="fa-solid fa-location-dot"></i>
+        <span>Orléans, France</span>
+      </div>
     </div>
   </section>
 
@@ -577,22 +654,30 @@
     const links = document.querySelectorAll('nav a');
     const sections = document.querySelectorAll('section');
 
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 120) {
-          current = section.getAttribute('id');
-        }
-      });
+    function updateActiveLink() {
+      const scrollPosition = window.scrollY;
+      const nearBottom = window.innerHeight + scrollPosition >= document.documentElement.scrollHeight - 40;
+
+      let current = sections[0]?.getAttribute('id') || '';
+
+      if (nearBottom) {
+        current = 'contact';
+      } else {
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 130;
+          if (scrollPosition >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+      }
 
       links.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
-          link.classList.add('active');
-        }
+        link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
       });
-    });
+    }
+
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
   </script>
 </body>
 </html>
